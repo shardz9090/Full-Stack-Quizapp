@@ -145,6 +145,20 @@ class Home extends MY_Controller
 			"results" => $leaders,
 		));
 	}
+	public function getscores()
+	{
+		$data = json_decode($this->input->raw_input_stream);
+		$fname = $this->session->userdata('fname');
+		$insert_data = array(
+			'fname' => $fname,
+			'user' => $data->user,
+			'correct' => $data->correct,
+			'marks' => $data->obtainedmarks,
+			'time' => $data->totalTime,
+		);
+
+		$this->db->insert('leaderboard', $insert_data);
+	}
 
 	public function quiz()
 	{

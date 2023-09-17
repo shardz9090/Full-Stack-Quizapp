@@ -120,7 +120,7 @@ class Home extends MY_Controller
 	}
 	public function viewques()
 	{
-		$data['questions'] = $this->addquestions->viewquests();
+		$data['questions'] = $this->addquestions->orderquest();
 		$this->load->view('viewques', $data);
 	}
 	public function getquestions()
@@ -132,6 +132,7 @@ class Home extends MY_Controller
 			"status" => "ok",
 			"no_of_questions" => count($ques),
 			"uname" => $this->session->userdata('uname'),
+			"uid" => $this->session->userdata('uid'),
 			"results" => $ques,
 		));
 	}
@@ -145,13 +146,12 @@ class Home extends MY_Controller
 			"results" => $leaders,
 		));
 	}
+	//get from svelte getscores
 	public function getscores()
 	{
 		$data = json_decode($this->input->raw_input_stream);
-		$fname = $this->session->userdata('fname');
 		$insert_data = array(
-			'fname' => $fname,
-			'user' => $data->user,
+			'uid' => $data->user,
 			'correct' => $data->correct,
 			'marks' => $data->obtainedmarks,
 			'time' => $data->totalTime,
@@ -167,10 +167,6 @@ class Home extends MY_Controller
 	public function quizmode()
 	{
 		$this->load->view('quizmode');
-	}
-	public function leaderboard()
-	{
-		$this->load->view('leaderboard');
 	}
 	public function loginmod()
 	{

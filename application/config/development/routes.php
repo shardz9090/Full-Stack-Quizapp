@@ -60,4 +60,3 @@ $route['register'] = 'Home/register';
 $route['viewques'] = 'Home/viewques';
 $route['quizmode'] = 'Home/quizmode';
 $route['quiz'] = 'Home/quiz';
-$route['leaderboard'] = 'Home/leaderboard';

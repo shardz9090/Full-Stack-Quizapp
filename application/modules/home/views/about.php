@@ -10,7 +10,6 @@
 Hello world
 <a href="<?= base_url('viewques') ?>">Questions</a>
 <a href="<?= base_url('register') ?>">register</a>
-<a href="<?= base_url('leaderboard') ?>">leaderboard</a>
 
 <br>
 <?php echo form_open_multipart('Home/getques') ?>
@@ -21,6 +20,7 @@ Hello world
 <?php if ($this->session->userdata('log') === 'logged') { ?>
     <a href="<?= base_url('quiz') ?>">Quiz</a><br />
 
+    <?php echo $this->session->userdata('uid'); ?><br />
     <?php echo $this->session->userdata('uname'); ?><br />
     <?php echo $this->session->userdata('fname'); ?><br />
     <?php echo $this->session->userdata('address'); ?><br />

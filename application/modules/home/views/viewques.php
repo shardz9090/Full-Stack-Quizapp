@@ -6,7 +6,7 @@
         border: 1px solid black;
     }
 </style>
-
+<a href="<?= base_url('') ?>">Home</a>
 <table>
     <thead>
         <tr>
@@ -27,7 +27,18 @@
                 <td><?php echo $ques->type ?></td>
                 <td><?php echo $ques->difficulty ?></td>
                 <td><?php echo $ques->question ?></td>
-                <td><?php echo $ques->answerss ?></td>
+                <td><?php
+                    $answersArray = json_decode($ques->answerss, true);
+                    shuffle($answersArray);
+                    foreach ($answersArray as $answerItem) {
+                        if ($answerItem['is_correct'] === 'Y') {
+                            echo '<strong>' . $answerItem['answer'] . '</strong>, ';
+                        } else {
+                            echo $answerItem['answer'] . ', ';
+                        }
+                    }
+
+                    ?></td>
             </tr>
         <?php endforeach; ?>
     </tbody>

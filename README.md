@@ -29,12 +29,12 @@ To get a local copy of the QuizApp up and running, follow these steps:
 1. Clone this repository to your local machine:
 
 ```bash
-    git clone https://github.com/shardz9090/Quiz-App-Full-stack-CI-3-Svelte-and-Postgresql-
+    git clone https://github.com/shardz9090/Full-Stack-Quizapp.git
 ```
 
 2. Start the development server using local server (xampp or wampp)
 
-3. Open your web browser and go to http://localhost/Quiz-App-Full-stack-CI-3-Svelte-and-Postgresql- to view the QuizApp.
+3. Open your web browser and go to http://localhost/Full-Stack-Quizapp to view the QuizApp.
 
 ## Contributing
 

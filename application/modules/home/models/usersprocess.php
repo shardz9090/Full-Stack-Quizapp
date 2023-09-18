@@ -6,7 +6,7 @@ class usersprocess extends CI_Model
     $query = "SELECT ld.*, u.uname
           FROM leaderboard AS ld
           INNER JOIN users AS u ON ld.uid = u.uid
-          ORDER BY ld.marks DESC";
+          ORDER BY ld.marks DESC, ld.time ASC, ld.correct DESC";
     $result = $this->db->query($query);
     return $result->result();
   }

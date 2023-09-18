@@ -20,6 +20,7 @@ Questions and answers data are fetched from PostgreSql database.
 ## Table of Contents
 
 - [Getting Started](#getting-started)
+- [Database](#database)
 - [Contributing](#contributing)
 
 ## Getting Started
@@ -35,6 +36,10 @@ To get a local copy of the QuizApp up and running, follow these steps:
 2. Start the development server using local server (xampp or wampp)
 
 3. Open your web browser and go to http://localhost/Full-Stack-Quizapp to view the QuizApp.
+
+## Database
+
+Database was created in PostgreSQl. It is located in the assets/Database/public.sql directory of the root folder. This database contains tables related to a quiz application, including answers, leaderboard, users, and quiz_questions.
 
 ## Contributing
 

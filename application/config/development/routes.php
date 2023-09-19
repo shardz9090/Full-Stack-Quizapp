@@ -60,3 +60,6 @@ $route['register'] = 'Home/register';
 $route['viewques'] = 'Home/viewques';
 $route['quizmode'] = 'Home/quizmode';
 $route['quiz'] = 'Home/quiz';
+$route['addvideos'] = 'Home/addvideos';
+$route['addimages'] = 'Home/addimages';
+$route['addpowerpoint'] = 'Home/addpowerpoint';

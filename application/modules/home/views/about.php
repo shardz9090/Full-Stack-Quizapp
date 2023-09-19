@@ -6,6 +6,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Add this JavaScript to your view file -->
 
+<a href="<?= base_url('addvideos') ?>">Add Video</a><br>
+<a href="<?= base_url('addimages') ?>">Add image</a><br>
+<a href="<?= base_url('addpowerpoint') ?>">Add powerpoint</a><br>
 
 Hello world
 <a href="<?= base_url('viewques') ?>">Questions</a>

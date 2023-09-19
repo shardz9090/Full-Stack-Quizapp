@@ -45,6 +45,88 @@ class Home extends MY_Controller
 	{
 		$this->load->view('about');
 	}
+
+	public function getvideos()
+	{
+		$vname = $this->input->post('vname');
+		$vdescription = $this->input->post('vdescription');
+
+		$config['upload_path'] = './assets/uploads/video';
+		$config['allowed_types'] = 'mp4|avi|mov|mkv';
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('vvideo')) {
+			$upload_data = $this->upload->data();
+			$video_file = $upload_data['file_name'];
+
+			$data = [
+				'vname' => $vname,
+				'vdescription' => $vdescription,
+				'vvideo' => $video_file
+			];
+
+			$this->db->insert('videos', $data);
+
+			echo "Upload successful!";
+			redirect('addvideos');
+		} else {
+			echo "Upload failed: " . $this->upload->display_errors();
+		}
+	}
+	public function getimages()
+	{
+		$iname = $this->input->post('iname');
+		$idescription = $this->input->post('idescription');
+
+		$config['upload_path'] = './assets/uploads/image';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg|webp';
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('iimage')) {
+			$upload_data = $this->upload->data();
+			$image_file = $upload_data['file_name'];
+
+			$data = [
+				'iname' => $iname,
+				'idescription' => $idescription,
+				'iimage' => $image_file
+			];
+
+			$this->db->insert('images', $data);
+
+			echo json_encode(['status' => 'success', 'message' => 'Upload successful']);
+		} else {
+			echo json_encode(['status' => 'error', 'message' => $this->upload->display_errors()]);
+		}
+	}
+	public function getpowerpoint()
+	{
+		$pname = $this->input->post('pname');
+		$pdescription = $this->input->post('pdescription');
+
+		$config['upload_path'] = './assets/uploads/powerpoint';
+		$config['allowed_types'] = 'ppt|pptx';
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('ppowerpoint')) {
+			$upload_data = $this->upload->data();
+			$powerpoint_file = $upload_data['file_name'];
+
+			$data = [
+				'pname' => $pname,
+				'pdescription' => $pdescription,
+				'ppowerpoint' => $powerpoint_file
+			];
+
+			$this->db->insert('powerpoints', $data);
+
+			echo "Upload successful!";
+			redirect('addpowerpoint');
+		} else {
+			echo "Upload failed: " . $this->upload->display_errors();
+		}
+	}
+
 	public function getques()
 	{
 		// Get the URL from the user.
@@ -121,7 +203,8 @@ class Home extends MY_Controller
 	public function viewques()
 	{
 		$data['questions'] = $this->addquestions->orderquest();
-		$this->load->view('viewques', $data);
+		$data['main'] = 'viewques';
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function getquestions()
 	{
@@ -167,6 +250,18 @@ class Home extends MY_Controller
 	public function quizmode()
 	{
 		$this->load->view('quizmode');
+	}
+	public function addvideos()
+	{
+		$this->load->view('addvideos');
+	}
+	public function addimages()
+	{
+		$this->load->view('addimages');
+	}
+	public function addpowerpoint()
+	{
+		$this->load->view('addpowerpoint');
 	}
 	public function loginmod()
 	{

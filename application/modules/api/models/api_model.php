@@ -5,7 +5,7 @@ class api_model extends CI_Model
     {
         $query = "(
             SELECT qq.*,
-                json_agg(jsonb_build_object('answer', a.answer, 'is_correct', a.is_correct)) AS answerss
+                json_agg(jsonb_build_object('answer', a.answer, 'is_correct', a.is_correct) ORDER BY RANDOM()) AS answerss
                 FROM quiz_questions AS qq
                 INNER JOIN answers AS a ON qq.qid = a.qid
                 WHERE qq.difficulty = 'easy'
@@ -15,7 +15,7 @@ class api_model extends CI_Model
             UNION ALL
             (
                 SELECT qq.*,
-                json_agg(jsonb_build_object('answer', a.answer, 'is_correct', a.is_correct)) AS answerss
+                json_agg(jsonb_build_object('answer', a.answer, 'is_correct', a.is_correct) ORDER BY RANDOM()) AS answerss
                 FROM quiz_questions AS qq
                 INNER JOIN answers AS a ON qq.qid = a.qid
                 WHERE qq.difficulty = 'medium'
@@ -25,7 +25,7 @@ class api_model extends CI_Model
             UNION ALL
             (
                 SELECT qq.*,
-                json_agg(jsonb_build_object('answer', a.answer, 'is_correct', a.is_correct)) AS answerss
+                json_agg(jsonb_build_object('answer', a.answer, 'is_correct', a.is_correct) ORDER BY RANDOM()) AS answerss
                 FROM quiz_questions AS qq
                 INNER JOIN answers AS a ON qq.qid = a.qid
                 WHERE qq.difficulty = 'hard'

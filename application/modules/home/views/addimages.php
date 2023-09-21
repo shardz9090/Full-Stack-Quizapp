@@ -1,15 +1,37 @@
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<form id="uploadForm" enctype="multipart/form-data">
-    <label for="iname">Image name</label>
-    <input type="text" name="iname" id="iname"><br>
-    <label for="idescription">Description</label>
-    <input type="text" name="idescription" id="idescription"><br>
-    <label for="iimage">Image file</label>
-    <input type="file" name="iimage" id="iimage"><br>
-    <button type="submit">Upload</button>
-</form>
+<script src="<?php base_url('./assets/frontback/js/jquery/jquery-3.7.1.js') ?>"></script>
+<script src="<?php base_url('./assets/frontback/js/jquery/jquery-3.7.1.min.map') ?>"></script>
 
-<div id="uploadResult"></div>
+<div class="videoform flex justify-center items-center">
+    <div class="formvideo bg-orange-200 p-2 rounded-xl">
+        <div class="pagetitle flex justify-center items-center">
+            <h1 class="text-xl text-black">Enter Image Details</h1>
+        </div>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div class=" form-control w-full max-w-xs">
+                <label class="label">
+                    <span class="label-text">Image Name</span>
+                </label>
+                <input type="text" name="iname" id="iname" placeholder="Image Name" class="input input-bordered w-full max-w-sm" />
+            </div>
+            <div class=" form-control w-full max-w-xs">
+                <label class="label">
+                    <span class="label-text">Image Description</span>
+                </label>
+                <textarea placeholder="Image Description" class="textarea textarea-bordered textarea-lg w-full max-w-sm" name="idescription" id="idescription""></textarea>
+        </div>
+        <div class=" form-control w-full max-w-xs">
+            <label class="label">
+                <span class="label-text">Image</span>
+            </label>
+            <input type="file" class="file-input file-input-bordered w-full max-w-sm" name="iimage" id="iimage"/>
+        </div>
+        <br>
+        <button class="btn btn-success">Upload</button>
+        </form>
+    </div>
+</div>
+
+<div id="uploadResult" class="bg-white text-black text-2xl"></div>
 
 <script>
     $(document).ready(function() {

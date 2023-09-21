@@ -39,11 +39,13 @@ class Home extends MY_Controller
 	 */
 	public function login()
 	{
-		$this->load->view('login');
+		$data['main'] = 'login';
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function index()
 	{
-		$this->load->view('about');
+		$data['main'] = 'index';
+		$this->load->view('layouts/main_view', $data);
 	}
 
 	public function getvideos()
@@ -197,8 +199,9 @@ class Home extends MY_Controller
 				$this->db->insert('answers', $incorrectAnswerData);
 			}
 		}
-
-		$this->load->view('disp_view', ['questions' => $questions]);
+		$data['main'] = 'disp_view';
+		$data['$questions'] = $questions;
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function viewques()
 	{
@@ -207,37 +210,25 @@ class Home extends MY_Controller
 		$this->load->view('layouts/main_view', $data);
 	}
 
-	public function getleaders()
-	{
-		header("content-type:application/json");
-		$leaders = $this->usersprocess->viewleaders();
-		echo json_encode(array(
-			"status" => "ok",
-			"played_num" => count($leaders),
-			"results" => $leaders,
-		));
-	}
-
-
 	public function quiz()
 	{
-		$this->load->view('quiz');
-	}
-	public function quizmode()
-	{
-		$this->load->view('quizmode');
+		$data['main'] = 'quiz';
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function addvideos()
 	{
-		$this->load->view('addvideos');
+		$data['main'] = 'addvideos';
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function addimages()
 	{
-		$this->load->view('addimages');
+		$data['main'] = 'addimages';
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function addpowerpoint()
 	{
-		$this->load->view('addpowerpoint');
+		$data['main'] = 'addpowerpoint';
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function loginmod()
 	{
@@ -250,7 +241,7 @@ class Home extends MY_Controller
 			$find = $query->num_rows();
 			if ($find > 0) {
 				$this->usersprocess->login($query);
-				redirect('about');
+				redirect('');
 			} else {
 				echo "wrong password";
 			}
@@ -258,7 +249,8 @@ class Home extends MY_Controller
 	}
 	public function register()
 	{
-		$this->load->view('register');
+		$data['main'] = 'register';
+		$this->load->view('layouts/main_view', $data);
 	}
 	public function registermod()
 	{

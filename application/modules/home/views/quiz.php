@@ -6,8 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="<?= base_url('assets/dist/quiz.png') ?>" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QuizApp</title>
-  <script type="module" crossorigin src="<?= base_url('assets/dist/index-3a5018b6.js') ?>"></script>
-  <link rel="stylesheet" href="<?= base_url('assets/dist/index-68d4becb.css') ?>">
+  <script type="module" crossorigin src="<?= base_url('assets/dist/index-c4c53a89.js') ?>"></script>
+  <link rel="stylesheet" href="<?= base_url('assets/dist/index-c046862c.css') ?>">
 </head>
 
 <body>

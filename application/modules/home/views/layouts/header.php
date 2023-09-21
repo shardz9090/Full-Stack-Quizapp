@@ -1,53 +1,85 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="retro">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.6/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+<style>
+    html {
+        background: linear-gradient(to right, #31B7C2, #7BC393);
+    }
+</style>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+    <div class="navbar">
+        <div class="navbar-start">
+            <div class="dropdown">
+                <label tabindex="0" class="btn btn-ghost lg:hidden">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+                    </svg>
+                </label>
+                <ul tabindex="0" class="menu menu-sm text-black dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>View Questions</a></li>
+                    <li>
+                        <a>Add items</a>
+                        <ul class="p-2">
+                            <li><a href="<?= base_url('addimages') ?>">Images</a></li>
+                            <li><a href="<?= base_url('addvideos') ?>">Videos</a></li>
+                            <li><a href="<?= base_url('addpowerpoint') ?>">Powerpoints</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>
+                    <?php
+                    if ($this->session->userdata('log') === 'logged') {
+                    ?>
+                        <li><a href="<?= base_url('logout') ?>">Logout</a></li>
+                    <?php } ?>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
             </div>
+            <a href="<?= base_url('') ?>" class="btn btn-ghost normal-case text-xl text-black">Quizapp</a>
         </div>
-    </nav>
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1">
+                <li tabindex="0">
+                    <details>
+                        <summary>Add items</summary>
+                        <ul class="p-2">
+                            <li><a href="<?= base_url('addimages') ?>">Images</a></li>
+                            <li><a href="<?= base_url('addvideos') ?>">Videos</a></li>
+                            <li><a href="<?= base_url('addpowerpoint') ?>">Powerpoints</a></li>
+                        </ul>
+                    </details>
+                </li>
+                <?php
+                if ($this->session->userdata('log') === 'logged') {
+                ?>
+                    <li><a href="<?= base_url('quiz') ?>">Play Quiz</a></li>
+                <?php } else { ?>
+                    <li><a href="<?= base_url('register') ?>">Register</a></li>
+
+                <?php } ?>
+            </ul>
+        </div>
+        <?php
+        if ($this->session->userdata('log') === 'logged') {
+        ?>
+            <div class="navbar-end space-x-3">
+                <a class="btn"><?= $this->session->userdata('uname') ?> </a>
+                <a href="<?= base_url('logout') ?>" class="btn hidden md:flex">Logout</a>
+
+            </div>
+        <?php } else { ?>
+            <div class="navbar-end">
+                <a href="<?= base_url('login') ?>" class="btn">Login</a>
+            </div>
+        <?php } ?>
+
+    </div>
 </body>
 
 </html>

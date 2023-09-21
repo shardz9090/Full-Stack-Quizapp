@@ -28,4 +28,25 @@ class Apihome extends MY_Controller
 
         $this->db->insert('leaderboard', $insert_data);
     }
+
+    public function getleaders()
+    {
+        header("content-type:application/json");
+        $leaders = $this->api_model->viewleaders();
+        echo json_encode(array(
+            "status" => "ok",
+            "played_num" => count($leaders),
+            "results" => $leaders,
+        ));
+    }
+    public function currentleaders()
+    {
+        header("content-type:application/json");
+        $leaders = $this->api_model->currentuser();
+        echo json_encode(array(
+            "status" => "ok",
+            "played_num" => count($leaders),
+            "results" => $leaders,
+        ));
+    }
 }

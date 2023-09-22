@@ -1,7 +1,7 @@
 <?php
 $this->load->view('layouts/header')
 ?>
-<div class="mainview md:p-12 p-4 min-h-screen">
+<div class="mainview md:p-12 p-2 min-h-screen">
     <?php
     $this->load->view($main);
 

@@ -4,8 +4,9 @@ class Apihome extends MY_Controller
 {
     public function getquestions()
     {
+        $category = $this->input->get('category');
         header("content-type:application/json");
-        $ques = $this->api_model->api_quests();
+        $ques = $this->api_model->api_quests($category);
 
         echo json_encode(array(
             "status" => "ok",
@@ -48,5 +49,10 @@ class Apihome extends MY_Controller
             "played_num" => count($leaders),
             "results" => $leaders,
         ));
+    }
+    public function getcategory()
+    {
+        $categories = $this->api_model->getcategory();
+        print_r($categories);
     }
 }

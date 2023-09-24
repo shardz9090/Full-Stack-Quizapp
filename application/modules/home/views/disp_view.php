@@ -6,7 +6,6 @@
         border: 1px solid black;
     }
 </style>
-<a href="<?= base_url('viewques') ?>">questions</a>
 <h1>Questions</h1>
 <table>
     <thead>

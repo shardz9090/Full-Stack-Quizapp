@@ -77,6 +77,7 @@ class Home extends MY_Controller
 	}
 	public function getimages()
 	{
+
 		$iname = $this->input->post('iname');
 		$idescription = $this->input->post('idescription');
 
@@ -131,10 +132,9 @@ class Home extends MY_Controller
 
 	public function getques()
 	{
-		// Get the URL from the user.
+
 		$url = $this->input->post('apiurl');
 
-		// Use CURL to fetch the data from the URL.
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -200,7 +200,7 @@ class Home extends MY_Controller
 			}
 		}
 		$data['main'] = 'disp_view';
-		$data['$questions'] = $questions;
+		$data['questions'] = $questions;
 		$this->load->view('layouts/main_view', $data);
 	}
 	public function viewques()
@@ -232,20 +232,23 @@ class Home extends MY_Controller
 	}
 	public function loginmod()
 	{
-		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-			$uname = $this->input->post('uname');
-			$password = $this->input->post('password');
-			$this->db->where('uname', $uname);
-			$this->db->where('password', $password);
-			$query = $this->db->get('users');
-			$find = $query->num_rows();
-			if ($find > 0) {
-				$this->usersprocess->login($query);
-				redirect('');
-			} else {
-				echo "wrong password";
-			}
+		$uname = $this->input->post('uname');
+		$password = $this->input->post('password');
+		$this->db->where('uname', $uname);
+		$this->db->where('password', $password);
+		$query = $this->db->get('users');
+		$find = $query->num_rows();
+		if ($find > 0) {
+			$this->usersprocess->login($query);
+			$response['success'] = true;
+			$response['message'] = 'Logged in successfully.';
+			redirect('');
+		} else {
+			$response['success'] = false;
+			$response['message'] = 'Login failed. Invalid credentials.';
 		}
+		header('Content-Type: application/json');
+		echo json_encode($response);
 	}
 	public function register()
 	{
@@ -272,5 +275,12 @@ class Home extends MY_Controller
 	{
 		$this->session->sess_destroy();
 		redirect('login');
+	}
+	public function selectcategory()
+	{
+		$categories = $this->api_model->getcategory();
+		$data['categories'] = $categories;
+		$data['main'] = 'selectcategory';
+		$this->load->view('layouts/main_view', $data);
 	}
 }

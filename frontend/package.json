@@ -1,0 +1,33 @@
+{
+  "name": "svelteonly",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.4.2",
+    "@types/jquery": "^3.5.18",
+    "autoprefixer": "^10.4.15",
+    "daisyui": "^3.7.6",
+    "postcss": "^8.4.29",
+    "svelte": "^4.0.5",
+    "tailwindcss": "^3.3.3",
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "axios": "^1.5.0",
+    "flowbite": "^1.8.1",
+    "flowbite-svelte": "^0.44.15",
+    "jquery": "^3.7.1",
+    "prettier": "^3.0.3",
+    "svelte-routing": "^2.3.0",
+    "svelte-spa-router": "^3.3.0",
+    "svelte-typewriter": "^3.1.6",
+    "tailwind-merge": "^1.14.0"
+  }
+}

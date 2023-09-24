@@ -1,5 +1,5 @@
 <div class="videoform flex justify-center items-center">
-    <div class="formvideo bg-orange-200 p-2 rounded-xl">
+    <div class="formvideo shadow-2xl p-2 rounded-xl">
         <div class="pagetitle flex justify-center items-center">
             <h1 class="text-xl text-black">Enter Video Details</h1>
         </div>

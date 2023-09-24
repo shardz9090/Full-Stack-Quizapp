@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="retro">
+<html lang="en" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="<?= base_url('./assets/dist/quiz.png') ?>">
     <title>Quizapp</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@3.7.6/dist/full.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="<?= base_url('./assets/frontback/js/swal.js') ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
     html {
-        background: linear-gradient(to right, #31B7C2, #7BC393);
+        background: white;
     }
 </style>
 
@@ -25,7 +27,7 @@
                     </svg>
                 </label>
                 <ul tabindex="0" class="menu menu-sm text-black dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a href="<?= base_url('quiz') ?>">Play Quiz</a></li>
+                    <li><a href="<?= base_url('selectcategory') ?>">Play Quiz</a></li>
                     <li><a>View Questions</a></li>
                     <li>
                         <a>Add items</a>
@@ -59,7 +61,7 @@
                 <?php
                 if ($this->session->userdata('log') === 'logged') {
                 ?>
-                    <li><a href="<?= base_url('quiz') ?>">Play Quiz</a></li>
+                    <li><a href="<?= base_url('selectcategory') ?>">Play Quiz</a></li>
                 <?php } else { ?>
                     <li><a href="<?= base_url('register') ?>">Register</a></li>
 
@@ -70,18 +72,14 @@
         if ($this->session->userdata('log') === 'logged') {
         ?>
             <div class="navbar-end space-x-3">
-                <a class="btn"><?= $this->session->userdata('uname') ?> </a>
-                <a href="<?= base_url('logout') ?>" class="btn hidden md:flex">Logout</a>
+                <a><?= $this->session->userdata('uname') ?> </a>
+                <a href="<?= base_url('logout') ?>" class="btn btn-info btn-sm hidden md:flex">Logout</a>
 
             </div>
         <?php } else { ?>
             <div class="navbar-end">
-                <a href="<?= base_url('login') ?>" class="btn">Login</a>
+                <a href="<?= base_url('login') ?>" class="btn btn-info btn-sm md:flex">Login</a>
             </div>
         <?php } ?>
 
     </div>
-
-</body>
-
-</html>

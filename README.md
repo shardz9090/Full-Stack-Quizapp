@@ -15,7 +15,14 @@ Questions and answers data are fetched from PostgreSql database.
     - User-friendly and responsive design.
     - Randomized question order for a fresh experience every time.
 
-![QuizApp Screenshot](./screenshotquiz.jpg)
+# Screenshots
+
+    ### Selecting category page
+        ![Quizapp Category](./screenshotcategory.png)
+    ### Selecting category page
+        ![Quizapp Quiz](./screenshotquiz.png)
+    ### Quizapp Result page
+        ![Quizapp Result](./screenshotresult.png)
 
 ## Table of Contents
 

@@ -5,7 +5,7 @@ export default {
     "./node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}",
   ],
   daisyui: {
-    themes: ["retro", "dark", "cupcake"],
+    themes: ["light", "dark", "cupcake"],
   },
   theme: {
     screens: {
@@ -23,7 +23,6 @@ export default {
     extend: {
     },
   },
-  darkMode: 'class',
   plugins: [
     require('flowbite/plugin'),
     require("daisyui")

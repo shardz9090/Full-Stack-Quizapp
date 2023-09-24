@@ -1,65 +1,49 @@
 <script>
-  let leaderdata = [
-    {
-      uname: "shardul1234",
-      onetotal_marks: "1302",
-      weektotal_marks: "1302",
-      monthtotal_marks: "1602",
-      alltotal: "1647",
-    },
-    {
-      uname: "shard",
-      onetotal_marks: "76",
-      weektotal_marks: "121",
-      monthtotal_marks: "199",
-      alltotal: "199",
-    },
-    {
-      uname: "shardul1",
-      onetotal_marks: "65",
-      weektotal_marks: "75",
-      monthtotal_marks: "85",
-      alltotal: "85",
-    },
-  ];
-  let curruser = "shard",
-    currone,
-    currweek,
-    currmonth,
-    currtotal;
-  for (let i = 0; i < leaderdata.length; i++) {
-    if (curruser === leaderdata[i].uname) {
-      currone = leaderdata[i].onetotal_marks;
-      currweek = leaderdata[i].weektotal_marks;
-      currmonth = leaderdata[i].monthtotal_marks;
-      currtotal = leaderdata[i].alltotal;
+  import { onMount, afterUpdate } from "svelte";
+  import axios from "axios";
+
+  let isLoading = 0;
+  let leaderdata = [];
+  let usercurrent = [];
+  export let username;
+
+  onMount(async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost/quizapp/api/Apihome/getleaders"
+      );
+      leaderdata = response.data.results;
+      usercurrent = leaderdata.find((user) => user.uname === username);
+      isLoading = 1;
+    } catch (error) {
+      console.error("Error fetching leaderboard data:", error);
     }
-  }
+  });
 </script>
 
-<div class="mx-2">
+{#if isLoading === 1}
   <div class="grid justify-items-center">
     <span class="text-2xl font-bold text-black"> Leaderboard</span>
   </div>
   <div
-    class="md:w-5/6 w-full h-full md:mx-auto rounded-lg overflow-x-hidden overflow-y-hidden"
+    class="md:w-5/6 w-full mt-2 h-full md:mx-auto rounded-lg shadow-2xl overflow-x-auto bsm:overflow-x-hidden bsm:overflow-y-hidden"
   >
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <thead
         class="text-xs text-gray-700 bg-gray-200 dark:bg-gray-700 dark:text-gray-400"
       >
         <tr>
-          <th scope="col" class="md:px-6 md:py-3 px-1 py-4 w-3"> Rank</th>
-          <th scope="col" class="md:px-4 md:py-3 px-1 py-4 text-center">
+          <th scope="col" class="md:px-6 md:py-3 px-2 py-4 w-3"> Rank</th>
+          <th scope="col" class="md:px-4 md:py-3 px-2 py-4 text-center">
             Username
           </th>
-          <th scope="col" class="md:px-6 md:py-3 px-1 py-4 text-center">
+          <th scope="col" class="md:px-6 md:py-3 px-2 py-4 text-center">
             Daily
           </th>
-          <th scope="col" class="md:px-6 md:py-3 px-1 py-4 text-center">
+          <th scope="col" class="md:px-6 md:py-3 px-2 py-4 text-center">
             Weekly
           </th>
-          <th scope="col" class="md:px-6 md:py-3 px-1 py-4 text-center">
+          <th scope="col" class="md:px-6 md:py-3 px-2 py-4 text-center">
             Monthly
           </th>
           <th
@@ -73,49 +57,48 @@
         <tr>
           <th
             scope="col"
-            class="md:px-6 md:py-3 px-1 py-4 w-3 text-red-600 text-xl"
+            class="md:px-6 md:py-3 px-2 py-4 w-3 text-red-600 text-xs bsm:text-xl"
           >
             N/A</th
           >
           <th
             scope="col"
-            class="md:px-4 md:py-3 px-1 py-4 text-center text-red-600 text-xl"
+            class="md:px-4 md:py-3 px-2 py-4 text-center text-red-600 text-xs bsm:text-xl"
           >
-            {curruser}
-            <span class="bg-yellow-400 text-sm p-1 text-white rounded-md"
+            {username}
+            <span class="bg-yellow-400 text-xs p-1 text-white rounded-md"
               >You</span
             >
           </th>
           <th
             scope="col"
-            class="md:px-6 md:py-3 px-1 py-4 text-center text-red-600 text-xl"
+            class="md:px-6 md:py-3 px-2 py-4 text-center text-red-600 text-xs bsm:text-xl"
           >
-            {currone}
+            {usercurrent.onetotal_marks}
           </th>
           <th
             scope="col"
-            class="md:px-6 md:py-3 px-1 py-4 text-center text-red-600 text-xl"
+            class="md:px-6 md:py-3 px-2 py-4 text-center text-red-600 text-xs bsm:text-xl"
           >
-            {currweek}
+            {usercurrent.weektotal_marks}
           </th>
           <th
             scope="col"
-            class="md:px-6 md:py-3 px-1 py-4 text-center text-red-600 text-xl"
+            class="md:px-6 md:py-3 px-2 py-4 text-center text-red-600 text-xs bsm:text-xl"
           >
-            {currmonth}
+            {usercurrent.monthtotal_marks}
           </th>
           <th
             scope="col"
-            class="md:px-6 md:py-3 px-1 py-4 text-center bg-gray-700 text-white"
+            class="md:px-6 md:py-3 px-2 py-4 text-center bg-gray-700 text-white"
           >
-            {currtotal}
+            {usercurrent.alltotal}
           </th>
         </tr>
       </thead>
       <hr class="bg-red-500" />
 
       <tbody>
-        <!-- <tr class="bg-white col-span-4">{leaders[1].uname} You</tr> -->
         {#each leaderdata as leader, index}
           <tr
             class="{index === 0
@@ -133,8 +116,8 @@
                 <span class="bg-black">
                   <svg
                     fill="#000000"
-                    height="20px"
-                    width="20px"
+                    height="15px"
+                    width="15px"
                     version="1.1"
                     id="Layer_1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -168,27 +151,27 @@
 
             <th
               scope="row"
-              class="md:px-4 md:py-4 px-1 text-center py-4 font-normal md:font-medium text-gray-950 whitespace-nowrap dark:text-white"
+              class="md:px-4 md:py-4 px-2 text-center py-4 font-medium text-gray-950 whitespace-nowrap dark:text-white"
             >
               {leader.uname}</th
             >
 
             <td
-              class="md:px-6 md:py-4 px-1 py-4 text-center text-gray-950 text-base font-medium"
+              class="md:px-6 md:py-4 px-2 py-4 text-center text-gray-950 text-base font-medium"
             >
               {leader.onetotal_marks}
             </td>
             <td
-              class="md:px-6 md:py-4 px-1 py-4 text-center text-base font-medium"
+              class="md:px-6 md:py-4 px-2 py-4 text-center text-base font-medium"
               >{leader.weektotal_marks}
             </td>
             <td
-              class="md:px-6 md:py-4 px-1 py-4 text-center text-base font-medium"
+              class="md:px-6 md:py-4 px-2 py-4 text-center text-base font-medium"
             >
               {leader.monthtotal_marks}
             </td>
             <td
-              class="md:px-6 md:py-4 px-1 py-4 bg-gray-700 text-center text-white text-base font-medium"
+              class="md:px-6 md:py-4 px-2 py-4 bg-gray-700 text-center text-white text-base font-medium"
             >
               {leader.alltotal}
             </td>
@@ -197,15 +180,16 @@
       </tbody>
     </table>
   </div>
-</div>
+{:else}
+  <div class="flex justify-center items-center">
+    <span class="loading loading-spinner loading-lg" />
+    <span class="text-black dark:text-white text-2xl font-bold"
+      >LOADING LEADERBOARD</span
+    >
+  </div>
+{/if}
 
 <style>
-  table,
-  td,
-  tr,
-  th {
-    border-spacing: 50vh;
-  }
   @media screen and (min-width: 700px) {
     tbody td {
       transition: all 0.2s linear;

@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* main {
-    background: linear-gradient(to right, #31B7C2, #7BC393);
-} */
 .containerrr {
     height: 100%;
     margin: 0;
@@ -14,6 +11,5 @@
 @media screen and (max-width: 1000px) {
     .slotbody {
         min-height: 78.5vh;
-        background: linear-gradient(to right, #31B7C2, #7BC393);
     }
 }

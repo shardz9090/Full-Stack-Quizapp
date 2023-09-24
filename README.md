@@ -18,11 +18,16 @@ Questions and answers data are fetched from PostgreSql database.
 # Screenshots
 
     ### Selecting category page
-        ![Quizapp Category](./screenshotcategory.png)
+    
+![Quizapp Category](./screenshotcategory.png)
+
     ### Selecting category page
-        ![Quizapp Quiz](./screenshotquiz.png)
+    
+![Quizapp Quiz](./screenshotquiz.png)
+
     ### Quizapp Result page
-        ![Quizapp Result](./screenshotresult.png)
+    
+![Quizapp Result](./screenshotresult.png)
 
 ## Table of Contents
 

@@ -3,6 +3,7 @@
   import { tweened } from "svelte/motion";
   import { Alert } from "flowbite-svelte";
   import Results from "./details/Results.svelte";
+  import Swal from "sweetalert2";
 
   export let listque;
   export let sendlen;
@@ -76,12 +77,45 @@
   //next
   function handleNext() {
     if (!skipChecked && !selectedAnswer) {
-      shownoansconfirm = true;
-      return;
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Select any option!",
+      });
     } else {
       if (skipChecked) {
         selectedAnswer = null;
-        showConfirmation = true;
+        Swal.fire({
+          title: "Are you sure?",
+          text: "Your want to skip this question!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#F73333",
+          cancelButtonColor: "#979797",
+          confirmButtonText: "Skip!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            qnum = qno;
+            skpans.push(qnum);
+            totalTime += newtime - seconds;
+            let newtimedb = listque[qnum].time;
+            newtime = parseFloat(newtimedb);
+            noans.push(qnum);
+            corrselans.push("noanswer");
+            resultans.push(listque[qnum]);
+            skiper.push(qnum);
+
+            if (qno < listque.length - 1) {
+              qno++;
+              let newtimedb = listque[qno].time;
+              newtime = parseFloat(newtimedb);
+              skipped++;
+              resetTimer();
+            }
+            check--;
+          }
+          skipChecked = !skipChecked;
+        });
       } else {
         answered += 1;
         qnum = qno;
@@ -136,37 +170,6 @@
     }, 3000);
     timedout += 1;
     check--;
-  }
-  // skip
-  function handleConfirmSkip() {
-    qnum = qno;
-    skpans.push(qnum);
-    totalTime += newtime - seconds;
-    let newtimedb = listque[qnum].time;
-    newtime = parseFloat(newtimedb);
-    noans.push(qnum);
-    corrselans.push("noanswer");
-    resultans.push(listque[qnum]);
-    skiper.push(qnum);
-
-    if (qno < listque.length - 1) {
-      qno++;
-      let newtimedb = listque[qno].time;
-      newtime = parseFloat(newtimedb);
-      skipped++;
-      resetTimer();
-    }
-
-    check--;
-    closeConfirmation();
-  }
-  //modal
-  function closeConfirmation() {
-    skipChecked = !skipChecked;
-    showConfirmation = false;
-  }
-  function closeconfirm() {
-    shownoansconfirm = false;
   }
 
   $: colorClass = getColorClass($timer);
@@ -250,21 +253,6 @@
         {username}
       />
     {:else}
-      {#if shownoansconfirm}
-        <div class="fixed inset-0 flex items-center justify-center z-50">
-          <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
-            <p>Press any button before changing Question</p>
-            <div class="mt-4 flex justify-center">
-              <button
-                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full mr-4"
-                on:click={closeconfirm}
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </div>
-      {/if}
       <div class="alertcontainer h-16 md:h-14 md:w-1/2 md:mx-20 p-1">
         <div class="mx-1">
           {#if showTimeoutAlert}
@@ -367,27 +355,7 @@
                 >Skip</label
               >
             </div>
-            {#if showConfirmation}
-              <div class="fixed inset-0 flex items-center justify-center z-50">
-                <div class="bg-white w-96 p-6 rounded-lg shadow-lg">
-                  <p>Are you sure you want to skip?</p>
-                  <div class="mt-4 flex justify-end">
-                    <button
-                      class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full mr-4"
-                      on:click={handleConfirmSkip}
-                    >
-                      OK
-                    </button>
-                    <button
-                      class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-full"
-                      on:click={closeConfirmation}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            {:else if qno < listque.length - 1}
+            {#if qno < listque.length - 1}
               <button
                 on:click={handleNext}
                 class="text-white btn bg-blue-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"

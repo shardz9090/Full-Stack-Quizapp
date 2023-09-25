@@ -45,7 +45,7 @@
                 <h2 class="card-title"> <?php echo $cats->category; ?></h2>
                 <p>Play category <?php echo $cats->category; ?> ?</p>
                 <div class="card-actions justify-end">
-                    <button class="btn btn-success"><a href="<?= base_url('quiz?category=' . urlencode($cats->category)) ?>">Start now</a></button>
+                    <a href="<?= base_url('quiz?category=' . urlencode($cats->category)) ?>"><button class="btn btn-success">Start now</button></a>
                 </div>
             </div>
         </div>

@@ -27,6 +27,7 @@
     "prettier": "^3.0.3",
     "svelte-routing": "^2.3.0",
     "svelte-spa-router": "^3.3.0",
+    "sweetalert2": "^11.7.28",
     "tailwind-merge": "^1.14.0"
   }
 }

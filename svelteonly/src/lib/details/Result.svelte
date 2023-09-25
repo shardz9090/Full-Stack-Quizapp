@@ -58,14 +58,14 @@
 
   function changeques(change) {
     if (change === -2) {
-      console.log(qnum);
-      console.log(sendlen);
       if (qnum < sendlen - 1) {
         qnum += 1;
         jQuery(document).ready(function () {
           jQuery('input[class*="checked"]').prop("checked", true);
           jQuery('input[class*="nocheck"]').prop("checked", false);
         });
+      } else {
+        qnum = 0;
       }
     } else if (change === -1) {
       if (qnum > 0) {
@@ -74,6 +74,8 @@
           jQuery('input[class*="checked"]').prop("checked", true);
           jQuery('input[class*="nocheck"]').prop("checked", false);
         });
+      } else {
+        qnum = sendlen - 1;
       }
     } else {
       qnum = change;
